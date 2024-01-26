@@ -2,6 +2,7 @@ package Test_cases;
 
 import Utilities.DriverClass;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,7 +14,7 @@ import java.time.Duration;
 public class _01_US301 extends DriverClass {
 
     @Test
-    void addingEbookToBasket() {
+    void addingEbookToBasket() throws InterruptedException {
 
         String targetURL = ("https://shopdemo.e-junkie.com/");
         String actualURL = driver.getCurrentUrl();
@@ -29,17 +30,23 @@ public class _01_US301 extends DriverClass {
 
         actions.click(driver.findElement(By.cssSelector("input[class=\"Promo-Code-Value\"]"))).sendKeys("0000").perform();
 
-        actions.click(driver.findElement(By.cssSelector("button[class=\"Promo-Apply\"]"))).perform();
+        actions.click(driver.findElement(By.xpath("//button[text()=\"Apply\"]"))).perform();
 
-       wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class=\"Overlay\"]")));
-
-      //  WebElement inValidPromoCode = driver.findElement(By.cssSelector("div[class=\"Overlay\"]"));
-
-     //  Assert.assertEquals(inValidPromoCode.getText(), "Invalid promo code.");
-
-      //  System.out.println("Test Passed: Invalid Promo code Message is displayed");
+        WebElement invalidPromoCodeMessage = driver.findElement(By.cssSelector("div[id=\"SnackBar\"]"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[id=\"SnackBar\"]")));
+        invalidPromoCodeMessage.getText();
+        Assert.assertTrue(invalidPromoCodeMessage.getText().contains("Invalid promo code"));
 
 
+
+      // WebElement errorMessage = driver.findElement(By.cssSelector("div[id=\"SnackBar\"]"));
+
+     //  try  {
+      //     errorMessage.getText();
+      // } catch (StaleElementReferenceException e) {
+      //     errorMessage = driver.findElement(By.cssSelector("\"div[id=\\\"SnackBar\\\"]\""));
+      //     errorMessage.getText();
+      // }
+      // Assert.assertEquals("Invalid promo code", errorMessage.getText());
     }
-
 }
