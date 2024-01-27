@@ -32,21 +32,13 @@ public class _01_US301 extends DriverClass {
 
         actions.click(driver.findElement(By.xpath("//button[text()=\"Apply\"]"))).perform();
 
-        WebElement invalidPromoCodeMessage = driver.findElement(By.cssSelector("div[id=\"SnackBar\"]"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[id=\"SnackBar\"]")));
-        invalidPromoCodeMessage.getText();
-        Assert.assertTrue(invalidPromoCodeMessage.getText().contains("Invalid promo code"));
+        Thread.sleep(2);
+
+        String invalidPromoCodeMessage = driver.findElement(By.xpath("//span[text()='Invalid promo code']")).getText();
+
+        Assert.assertEquals(invalidPromoCodeMessage, "Invalid promo code");
 
 
 
-      // WebElement errorMessage = driver.findElement(By.cssSelector("div[id=\"SnackBar\"]"));
-
-     //  try  {
-      //     errorMessage.getText();
-      // } catch (StaleElementReferenceException e) {
-      //     errorMessage = driver.findElement(By.cssSelector("\"div[id=\\\"SnackBar\\\"]\""));
-      //     errorMessage.getText();
-      // }
-      // Assert.assertEquals("Invalid promo code", errorMessage.getText());
     }
 }
