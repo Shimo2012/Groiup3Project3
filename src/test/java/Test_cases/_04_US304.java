@@ -14,7 +14,7 @@ public class _04_US304 extends DriverClass {
         actions.click(driver.findElement(By.cssSelector("button[onclick=\"return EJProductClick('1595015')\"]"))).perform();
         driver.switchTo().frame(driver.findElement(By.cssSelector("iFrame[class=\"EJIframeV3 EJOverlayV3\"]")));
         actions.click(driver.findElement(By.cssSelector("button[class=\"Payment-Button CC\"]"))).perform();
-        driver.switchTo().frame(driver.findElement(By.cssSelector("iFrame[name=\"__privateStripeMetricsController2670\"]")));
+       // driver.switchTo().frame(driver.findElement(By.cssSelector("iFrame[name=\"__privateStripeMetricsController2670\"]")));
         actions.click(driver.findElement(By.cssSelector("input[placeholder=\"Email\"]"))).sendKeys("leen2020@gmail.com").perform();
         actions.click(driver.findElement(By.cssSelector("input[placeholder=\"Confirm Email\"]"))).sendKeys("leen2020@gmail.com").perform();
         actions.click(driver.findElement(By.cssSelector("input[placeholder=\"Name On Card\"]"))).sendKeys("Leen Adam").perform();
